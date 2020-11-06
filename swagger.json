@@ -1,0 +1,208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a Collaboration API built using Express (minimal and flexible Node.js web application framework) and MongoDB as the Database.\nWe are using the Express-Validator that prevents requests which include invalid username or password.\nWe are using bcryptjs as a secure method to store passwords in Database using Encryption Techniques (Generating salt and hashing)\nWe are using jsonwebtoken as a secure method to transmit information between parties as a JSON object with a Digital Signature\nWe use body-parser to parse incoming requests in the middleware before the handlers.\n",
+    "version": "1.0.0",
+    "title": "Collaboration API"
+  },
+  "host": "130.61.255.170:5000",
+  "tags": [
+    {
+      "name": "signup",
+      "description": "Used to create a new user account."
+    },
+    {
+      "name": "login",
+      "description": "Used to sign in to an existing user account."
+    },
+    {
+      "name": "getUserInfo",
+      "description": "Used to retrieve user info."
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": [
+          "signup"
+        ],
+        "summary": "Add a new user to the database",
+        "description": " The Signup method takes in username, email and password. It checks the username and password for invalid characters and also checks if the password has a minimum length of 5. The password is encrypted using salting and hashing to ensure secure saving of information.\nThe User object is then saved into the database with the data entered of username, email and password. An additional CreatedAt attribute is added to the object denoting the date and time of creation of the user account.\nIt returns the TokenID generated after signing up the user. ",
+        "operationId": "signupUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "SignUpUser",
+            "description": "User object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "password",
+                "email"
+              ],
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "Cristiano Ronaldo"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "cr7@juventus.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "RealMadrid"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK : User Added Successfully!"
+          },
+          "300": {
+            "description": "Error : Express-Validator Error!"
+          },
+          "400": {
+            "description": "Error: User Already Exists."
+          },
+          "500": {
+            "description": "Error: Data cannot be Saved."
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Login an existing user from the database",
+        "description": " Used to login an existing user present in the database. It takes in the Email ID and Password of the User and verifies if it exists in the database with the given credentials.\nIt returns the TokenID generated after logging in the user. ",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "LoginUser",
+            "description": "User object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "password",
+                "email"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "cr7@juventus.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "RealMadrid"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK : User Logged in Successfully!"
+          },
+          "401": {
+            "description": "Error in Authentication"
+          },
+          "500": {
+            "description": "Error in Server"
+          }
+        }
+      }
+    },
+    "/getUserInfo": {
+      "get": {
+        "tags": [
+          "getUserInfo"
+        ],
+        "summary": "Retrieve information about a user from the Database",
+        "description": "Used to retrieve information about a user from the Database by using the input parameter of Token ID that is received after signup or login of the user.\nThis then returns the User Object from the Database containing details such as Username, EmailID, Password and CreatedAt. ",
+        "operationId": "getUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Authorization header containing TokenID to retrieve the User in the database",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK : User Information Retrieved Successfully!"
+          },
+          "401": {
+            "description": "Error in Authentication"
+          },
+          "411": {
+            "description": "Error in Fetching user"
+          },
+          "500": {
+            "description": "Error in Server"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "username",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Cristiano_Ronaldo"
+        },
+        "email": {
+          "type": "string",
+          "example": "cr7@juventus.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "RealMadrid"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "08/06/2020"
+        }
+      }
+    }
+  }
+}

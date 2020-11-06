@@ -1,0 +1,31 @@
+{
+  "name": "Collaboration-Backend",
+  "version": "1.0.0",
+  "description": "Collaboration REST API created using Express.js and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "loginStart": "nodemon index.js",
+    "test": "env NODE_ENV=test mocha --timeout 10000 || exit 0"
+  },
+  "author": "Hanumesh Palla",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bunyan": "^1.8.14",
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mockgoose": "^8.0.4",
+    "mongoose": "^5.9.18",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1",
+    "supertest": "^4.0.2"
+  }
+}

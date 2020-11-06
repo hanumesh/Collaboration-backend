@@ -1,0 +1,22 @@
+{"level":"info","message":"The server has been initiated at PORT 4000","timestamp":"2020-11-06 13:39:57"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 13:39:58"}
+{"level":"info","message":"The server has been initiated at PORT 4000","timestamp":"2020-11-06 13:44:42"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 13:44:42"}
+{"level":"info","message":"The API has started working!","timestamp":"2020-11-06 13:45:10"}
+{"level":"info","message":"The server has been initiated at PORT 4000","timestamp":"2020-11-06 14:27:31"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 14:27:31"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 4000 0.0.0.0","timestamp":"2020-11-06 14:37:30"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 14:37:30"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 4000 0.0.0.0","timestamp":"2020-11-06 14:39:26"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 14:39:26"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 3000 0.0.0.0","timestamp":"2020-11-06 14:51:55"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 14:51:55"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 5000 0.0.0.0","timestamp":"2020-11-06 14:58:04"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 14:58:04"}
+{"level":"info","message":"The API has started working!","timestamp":"2020-11-06 14:58:15"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 5000 0.0.0.0","timestamp":"2020-11-06 15:01:48"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 15:01:48"}
+{"level":"info","message":"The API has started working!","timestamp":"2020-11-06 15:01:59"}
+{"level":"info","message":"The server has been initiated at PORT: HOSTNAME 5000 0.0.0.0","timestamp":"2020-11-06 15:05:40"}
+{"level":"info","message":"Successfully connected to MongoDB","timestamp":"2020-11-06 15:05:40"}
+{"level":"info","message":"The API has started working!","timestamp":"2020-11-06 15:06:11"}

@@ -4,7 +4,7 @@ const bunyan = require("bunyan");
 const level = process.env.NODE_LOGGING_LEVEL || "info";
 
 const bunyanLog = bunyan.createLogger({
-  name: "LoginAuthentication",
+  name: "Collaboration-backend",
   serializers: {
     req: bunyan.stdSerializers.req,
     res: bunyan.stdSerializers.res,

@@ -11,7 +11,7 @@ module.exports = function(req, res, next) { //In this middleware function, "next
     return res.status(401).json({ message: "Error in Authentication" });
 
   try {
-    const decoded = jwt.verify(token, "raunakMokhasi");
+    const decoded = jwt.verify(token, "hanumesh");
     req.user = decoded.user;
     next();
   } 

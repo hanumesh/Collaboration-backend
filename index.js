@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 const bodyParser = require("body-parser");  //Used to parse incoming requests in a middleware before your handlers
 const InitiateMongoServer = require("./db");
 const winstonLogger = require("./winstonLogger");
@@ -9,11 +10,12 @@ InitiateMongoServer();
 const PORT = process.env.PORT || 5000;
 const HOSTNAME = '0.0.0.0';
 
+app.use(cors()) // Use this after the variable declaration
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.json({ version: '1.0.0', message: "The API has started working!" });
-  winstonLogger.log('info',`The API has started working!`);
+  res.json({ version: '1.0.0', message: "The Collaboration REST API is working!" });
+  winstonLogger.log('info',`The Collaboration REST API is working!`);
 });
 
 
@@ -70,7 +72,7 @@ app.post(
       };
 
       jwt.sign(
-        payload, "raunakMokhasi", { expiresIn: '30d' }, //Token ID keeps changing as payload expires every month
+        payload, "hanumesh", { expiresIn: '30d' }, //Token ID keeps changing as payload expires every month
         (err, token) => {
           if (err) throw err;
           res.status(200).json({ token });

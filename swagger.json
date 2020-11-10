@@ -47,18 +47,23 @@
             "schema": {
               "type": "object",
               "required": [
-                "username",
+                "firstname",
+                "lastname",
                 "password",
                 "email"
               ],
               "properties": {
-                "username": {
+                "firstname": {
                   "type": "string",
-                  "example": "Cristiano Ronaldo"
+                  "example": "Hanumesh"
+                },
+                "lastname":{
+                  "type": "string",
+                  "example": "Palla"
                 },
                 "email": {
                   "type": "string",
-                  "example": "cr7@juventus.com"
+                  "example": "hanum786@gmail.com"
                 },
                 "password": {
                   "type": "string",
@@ -106,15 +111,14 @@
             "required": true,
             "schema": {
               "type": "object",
-              "required": [
-                "username",
+              "required": [                
                 "password",
                 "email"
               ],
               "properties": {
                 "email": {
                   "type": "string",
-                  "example": "cr7@juventus.com"
+                  "example": "hanum786@gmail.com"
                 },
                 "password": {
                   "type": "string",
@@ -188,11 +192,11 @@
       "properties": {
         "username": {
           "type": "string",
-          "example": "Cristiano_Ronaldo"
+          "example": "Hanumesh_Palla"
         },
         "email": {
           "type": "string",
-          "example": "cr7@juventus.com"
+          "example": "hanum786@gmail.com"
         },
         "password": {
           "type": "string",

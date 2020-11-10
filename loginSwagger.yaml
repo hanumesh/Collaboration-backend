@@ -25,11 +25,11 @@ paths:
       tags:
       - signup
       summary: Add a new user to the database
-      description: " The Signup method takes in username, email and password. It checks
-        the username and password for invalid characters and also checks if the password
+      description: " The Signup method takes in firstname, lastname, email and password. It checks
+        the firstname, lastname, email  and password for invalid characters and also checks if the password
         has a minimum length of 5. The password is encrypted using salting and hashing
         to ensure secure saving of information.\nThe User object is then saved into
-        the database with the data entered of username, email and password. An additional
+        the database with the data entered of firstname, lastname, email and password. An additional
         CreatedAt attribute is added to the object denoting the date and time of creation
         of the user account.\nIt returns the TokenID generated after signing up the
         user. "
@@ -46,16 +46,20 @@ paths:
         schema:
           type: object
           required:
-          - username
+          - firstname
+          - lastname
           - password
           - email
           properties:
-            username:
+            firstname:
               type: string
-              example: Cristiano Ronaldo
+              example: Hanumesh
+            lastname:
+              type: string
+              example: Palla
             email:
               type: string
-              example: cr7@juventus.com
+              example: hanum786@gmail.com
             password:
               type: string
               example: RealMadrid

@@ -23,7 +23,8 @@ describe('Signup Function Test', function() {
            .post('/signup')
            .set('Accept', 'application/json')
            .set('Content-Type', 'application/json')
-           .send({ username: 'test', email: 'test@test.com', password: 'test123' })
+           //.send({ username: 'test', email: 'test@test.com', password: 'test123' })
+           .send({ firstname: 'test', lastname: 'test' , email: 'test@test.com', password: 'test123' })
            .expect(400)   //Test for Bad Response 400 - User already exists
            .expect('Content-Type', /json/)
            .expect(function(response) {
@@ -40,7 +41,8 @@ describe('Signup Function Test', function() {
            .post('/signup')
            .set('Accept', 'application/json')
            .set('Content-Type', 'application/json')
-           .send({ username: 'arsenal', email: 'manu', password: 'chelsea123' })
+           //.send({ username: 'arsenal', email: 'manu', password: 'chelsea123' })
+           .send({ firstname: 'test', lastname: 'test' , email: 'test@test.com', password: 'test123' })
            .expect(300)   //Test for Error: Multiple Choices 300 - Invalid Email
            .expect('Content-Type', /json/)
            .expect(function(err, response) {
@@ -55,7 +57,8 @@ describe('Signup Function Test', function() {
            .post('/signup')
            .set('Accept', 'application/json')
            .set('Content-Type', 'application/json')
-           .send({ username: 'galaxy', email: 'hel@lo.com', password: 'hel' })
+          // .send({ username: 'galaxy', email: 'hel@lo.com', password: 'hel' })
+          .send({ firstname: 'test', lastname: 'test' , email: 'test@test.com', password: 'test123' })
            .expect(300)   //Test for Error: Multiple Choices 300 - Invalid Password (less than length 5)
            .expect('Content-Type', /json/)
            .expect(function(err, response) {

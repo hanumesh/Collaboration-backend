@@ -15,16 +15,15 @@ app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.json({ version: '1.0.0', message: "The Collaboration REST API is working!" });
-  winstonLogger.log('info',`The Collaboration REST API is working!`);
+  winstonLogger.log('info', `The Collaboration REST API is working!`);
 });
 
 
 app.listen(PORT, HOSTNAME, (req, res) => {
   //console.log(`The server has been initiated at PORT ${PORT}`);
   console.log();
-  winstonLogger.log('info',`The server has been initiated at PORT: HOSTNAME ${PORT} ${HOSTNAME}`);
+  winstonLogger.log('info', `The server has been initiated at PORT: HOSTNAME ${PORT} ${HOSTNAME}`);
 });
-
 
 const jwt = require("jsonwebtoken"); //Secure way to transmit information between parties as a JSON object with a Digital Signature
 const { check, validationResult } = require("express-validator"); // Prevents request that includes invalid username or password
@@ -41,7 +40,8 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.post(
   "/signup",
   [
-    check("username", "Please enter a valid Username").not().isEmpty(),
+    check("firstname", "Please enter a valid firstname").not().isEmpty(),
+    check("lastname", "Please enter a valid lastname").not().isEmpty(),
     check("email", "Please enter a valid Email").isEmail(),
     check("password", "Please enter a valid Password (of atleast 5 characters long)").isLength({ min: 5 })
   ],
@@ -53,7 +53,7 @@ app.post(
       });
     }
 
-    const { username, email, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
     //Here, as req.body's shape is based on user-controlled input, all properties and values in this object are untrusted and should be validated before trusting. Thus we use body-parser to parse incoming requests in the middleware before the handlers
     try {
       let user = await User.findOne({ email }); //MongoDB method to search the collection and find a record that matches the given parameter (in this case email)
@@ -61,24 +61,30 @@ app.post(
         return res.status(400).json({ message: "User Already Exists" });
       }
 
-      user = new User({ username, email, password });
+      user = new User({ firstname, lastname, email, password });
 
       const saltValue = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, saltValue);
       await user.save();
 
       const payload = {
-        user: { id: user.id }
+        user: {
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname
+        }
       };
 
+
       jwt.sign(
-        payload, "hanumesh", { expiresIn: '30d' }, //Token ID keeps changing as payload expires every month
+        payload, "hanumesh", { expiresIn: '30d' },
+        //Token ID keeps changing as payload expires every month
         (err, token) => {
           if (err) throw err;
           res.status(200).json({ token });
         }
       );
-    } 
+    }
     catch (err) {
       console.log(err.message);
       res.status(500).send("Error while Saving Data");
@@ -109,19 +115,23 @@ app.post(
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(401).json({ message: "Incorrect Password Entered!"});
+        return res.status(401).json({ message: "Incorrect Password Entered!" });
 
       const payload = {
-        user: { id: user.id }
+        user: {
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname
+        }
       };
 
-      jwt.sign( payload, "hanumesh", { expiresIn: '30d' },
+      jwt.sign(payload, "hanumesh", { expiresIn: '30d' },
         (err, token) => {
           if (err) throw err;
           res.status(200).json({ token });
         }
       );
-    } 
+    }
     catch (e) {
       //console.error(e);
       winstonLogger.log('error', new Error(e));
@@ -131,11 +141,12 @@ app.post(
 );
 
 
-app.get("/getUserInfo", auth, async (req, res) => { //Retrieve the logged in user using the token (received from auth.js)
+app.get("/getUserInfo", auth, async (req, res) => {
+  //Retrieve the logged in user using the token (received from auth.js)
   try {
     const user = await User.findById(req.user.id);
     res.json(user);
-  } 
+  }
   catch (e) {
     res.send({ message: "Error in Fetching user" });
     //res.status(411).json({ message: "Error in Fetching user" });
